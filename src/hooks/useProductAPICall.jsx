@@ -7,7 +7,7 @@ const useProductAPICall = (endpoint) => {
     const fetchData = async () => {
       const response = await fetch(endpoint);
       const result = await response.json();
-      setproductAPIResponse(result.products);
+      setproductAPIResponse(result?.products);
     };
 
     fetchData();
