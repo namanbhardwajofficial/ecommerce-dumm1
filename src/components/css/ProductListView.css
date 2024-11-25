@@ -1,10 +1,68 @@
-/* ProductListView.css */
+/* Container for the entire product list and filter */
 
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
+  width: 100%;
+}
+
+.product-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: 20px;
-  background-color: #f9f9f9;
+}
+
+/* Section for the filter and sort options */
+.filter-sort-container {
+  display: flex;
+  justify-content: space-between; /* Spread out filter and sort */
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* The filter and sort items themselves */
+.filter-sort-container select,
+.filter-sort-container input[type="number"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* Styling for individual filter sections (if you need to further style them) */
+.filter-section,
+.sort-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-section label,
+.sort-section label {
+  font-weight: bold;
+}
+
+/* Product list styling */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Responsive grid */
+  gap: 20px;
+  padding: 20px;
+  justify-items: center; /* Center cards */
+}
+
+/* Optional: Style the card container to make products responsive */
+.product-card {
+  width: 100%;
+  max-width: 250px;
+}
+
+/* Add padding or spacing between the filter and sort container and the product cards */
+.product-list-container {
+  padding-top: 20px;
 }

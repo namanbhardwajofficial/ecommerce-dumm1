@@ -1,5 +1,5 @@
 import React from "react";
-import ProductListView from "./components/ProductListView";
+import ProductListView from "./components/jsx/ProductListView";
 
 const App = () => {
   return (

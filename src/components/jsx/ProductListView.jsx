@@ -1,8 +1,8 @@
 import React from "react";
-import useProductAPICall from "../hooks/useProductAPICall";
-import { PRODUCT_API_ENDPOINT } from "../constants/constants";
+import useProductAPICall from "../../hooks/useProductAPICall";
+import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "./ProductCard";
-import "./css/ProductListView.css";
+import "../css/ProductListView.css";
 
 const ProductListView = () => {
   const productAPIResponse = useProductAPICall(PRODUCT_API_ENDPOINT);

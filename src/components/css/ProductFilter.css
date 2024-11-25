@@ -1,0 +1,66 @@
+/* Full-Screen Filter Container (Revised) */
+.filter-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background-color: #fff; /* White background for the filter container */
+  padding: 10px 20px; /* Adjust the padding to suit your layout */
+  border-bottom: 1px solid #ddd; /* Optional border for separation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  position: sticky;
+  top: 0; /* Keeps the filter fixed on top as you scroll */
+  z-index: 999;
+}
+
+/* Filter UI Elements in a row */
+.filter-container select,
+.filter-container input[type="number"],
+.sorting-container select {
+  padding: 10px;
+  margin: 0 10px;
+  width: auto;
+  max-width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Price Range Inputs */
+.price-range input {
+  width: 80px;
+}
+
+/* Sorting Container */
+.sorting-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.sorting-container select {
+  width: auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Clear Filters Button */
+.clear-filters-btn {
+  padding: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.clear-filters-btn:hover {
+  background-color: #ff4b4b;
+}
+
+/* Button to close filter container (optional) */
+.filter-container button.close-filter {
+  display: none; /* Hide the button if you want to keep the filter container always visible */
+}

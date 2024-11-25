@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { RUPEES_SYMBOL, TOTAL_RATING } from "../constants/constants";
-import { capitaliseString } from "../utils/utils";
-import "./css/ProductCard.css";
+import { RUPEES_SYMBOL, TOTAL_RATING } from "../../constants/constants";
+import { capitaliseString } from "../../utils/utils";
+import "../css/ProductCard.css";
 
 const ProductCard = ({
   title,
