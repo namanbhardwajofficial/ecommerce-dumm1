@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import useProductAPICall from "../hooks/useProductAPICall";
-import { PRODUCT_API_ENDPOINT } from "../constants/constants";
-import ProductCard from "./ProductCard";
-import "./css/ProductListView.css";
+import useProductAPICall from "../../hooks/useProductAPICall";
+import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
+import ProductCard from "../ProductCard/ProductCard";
+import "./ProductListView.css";
 
 const ProductListView = () => {
   const initialCardData = useProductAPICall(PRODUCT_API_ENDPOINT); // Fetch initial data
@@ -11,7 +11,9 @@ const ProductListView = () => {
   // Fetch additional data manually
   const fetchMoreCardData = useCallback(async () => {
     try {
-      const response = await fetch(PRODUCT_API_ENDPOINT);
+      const url = PRODUCT_API_ENDPOINT + `?limit=15`;
+      console.log(url);
+      const response = await fetch(url);
       const result = await response.json();
       if (result?.products) {
         setCardData((prev) => [...prev, ...result.products]);
@@ -43,7 +45,7 @@ const ProductListView = () => {
       {cardData.length > 0 &&
         cardData.map((product) => (
           <ProductCard
-            key={product?.id}
+            key={product?.id * Math.random() * 10} //since in infinte scroll I am calling same api again and again I am adding a random key so that it does not gives warning
             title={product?.title}
             description={product?.description}
             imageAddress={product?.images?.[0]}
