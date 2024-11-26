@@ -1,62 +1,88 @@
-import React, { useEffect, useState, useCallback } from "react";
+// ProductListView.js
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import useProductAPICall from "../../hooks/useProductAPICall";
 import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
+import ProductFilterSort from "../ProductFilterSort/ProductFilterSort";
 import "./ProductListView.css";
 
 const ProductListView = () => {
-  const initialCardData = useProductAPICall(PRODUCT_API_ENDPOINT); // Fetch initial data
-  const [cardData, setCardData] = useState([]);
+  const initialCardData = useProductAPICall(PRODUCT_API_ENDPOINT);
+  const [cardData, setCardData] = useState(initialCardData || []);
+  const [filters, setFilters] = useState({
+    category: "",
+    priceRange: [0, 10000],
+    rating: 0,
+    sortBy: "",
+  });
 
-  // Fetch additional data manually
-  const fetchMoreCardData = useCallback(async () => {
-    try {
-      const url = `${PRODUCT_API_ENDPOINT}?limit=15`;
-      const response = await fetch(url);
-      const result = await response.json();
-      if (result?.products) {
-        setCardData((prev) => [...prev, ...result.products]);
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
+  const filteredProducts = useMemo(() => {
+    let filtered = [...cardData];
+
+    // Filter by category
+    if (filters.category) {
+      filtered = filtered.filter(
+        (product) => product.category === filters.category
+      );
     }
-  }, []);
 
+    // Filter by price range
+    filtered = filtered.filter(
+      (product) =>
+        product.price >= filters.priceRange[0] &&
+        product.price <= filters.priceRange[1]
+    );
+
+    // Filter by rating
+    if (filters.rating > 0) {
+      filtered = filtered.filter((product) => product.rating >= filters.rating);
+    }
+
+    // Sort the filtered data
+    if (filters.sortBy === "priceLowToHigh") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (filters.sortBy === "priceHighToLow") {
+      filtered.sort((a, b) => b.price - a.price);
+    }
+
+    return filtered;
+  }, [cardData, filters]);
+
+  // Fetch initial data on mount
   useEffect(() => {
     if (initialCardData) {
       setCardData(initialCardData);
     }
   }, [initialCardData]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-
-      // Check if the user has scrolled near the bottom
-      if (scrollTop + clientHeight >= scrollHeight - 100) {
-        fetchMoreCardData();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [fetchMoreCardData]);
+  // Handle filter changes
+  const handleFilterChange = (filterType, value) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [filterType]: value }));
+  };
 
   return (
-    <div className="product-list">
-      {cardData.length > 0 &&
-        cardData.map((product) => (
-          <ProductCard
-            key={product?.id * Math.random() * 10} //since in infinte scroll I am calling same api again and again I am adding a random key so that it does not gives warning
-            title={product?.title}
-            description={product?.description}
-            imageAddress={product?.images?.[0]}
-            category={product?.category}
-            price={product?.price}
-            rating={product?.rating}
-          />
-        ))}
+    <div className="product-list-container">
+      {/* Filters and Sort Options */}
+      <ProductFilterSort
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
+
+      {/* Display Products */}
+      <div className="product-list">
+        {filteredProducts.length > 0 &&
+          filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              title={product.title}
+              description={product.description}
+              imageAddress={product.images?.[0]}
+              category={product.category}
+              price={product.price}
+              rating={product.rating}
+            />
+          ))}
+      </div>
     </div>
   );
 };
