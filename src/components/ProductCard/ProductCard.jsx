@@ -10,11 +10,12 @@ const ProductCard = ({
   category,
   price,
   rating,
+  onClick,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => onClick()}>
       <div className="image-container">
         {/* Shimmer effect displayed until the image is loaded */}
         {!imageLoaded && <div className="shimmer-effect"></div>}
