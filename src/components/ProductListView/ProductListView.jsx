@@ -1,6 +1,5 @@
 // ProductListView.js
 import { useState, useEffect, useMemo, useRef } from "react";
-import useProductAPICall from "../../hooks/useProductAPICall";
 import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
 import ProductFilterSort from "../ProductFilterSort/ProductFilterSort";
@@ -11,7 +10,6 @@ const ProductListView = () => {
   const [cardData, setCardData] = useState([]);
   const [categories, setCategories] = useState([]); // State to store unique categories
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
   const [lastElement, setLastElement] = useState(null);
 
   const [filters, setFilters] = useState({
@@ -32,7 +30,6 @@ const ProductListView = () => {
   );
 
   const fetchCardData = async () => {
-    setLoading(true);
     try {
       const response = await fetch(
         `${PRODUCT_API_ENDPOINT}?limit=10&skip=${10 * page}`
@@ -44,7 +41,6 @@ const ProductListView = () => {
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
