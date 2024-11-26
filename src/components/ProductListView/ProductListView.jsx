@@ -167,7 +167,7 @@ const ProductListView = () => {
             </div>
           ))}
       </div>
-      {filteredProducts.length == 0 && (
+      {filteredProducts.length === 0 && (
         <div className="no-result">No search result found!!!</div>
       )}
 
