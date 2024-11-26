@@ -45,6 +45,7 @@ const ProductListView = () => {
 
   useEffect(() => {
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const ProductListView = () => {
       const uniqueCategories = [...new Set(newCategories)];
       setCategories(uniqueCategories);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const filteredProducts = useMemo(() => {
@@ -165,6 +167,9 @@ const ProductListView = () => {
             </div>
           ))}
       </div>
+      {filteredProducts.length == 0 && (
+        <div className="no-result">No search result found!!!</div>
+      )}
 
       {/* Modal to display selected product details */}
       {selectedProduct != null && (
