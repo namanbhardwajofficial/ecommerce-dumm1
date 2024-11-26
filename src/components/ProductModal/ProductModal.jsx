@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { PRODUCT_API_ENDPOINT, RUPEES_SYMBOL } from "../../constants/constants";
+import {
+  AVAILABILITY,
+  BRAND,
+  CATEGORY,
+  DESCRIPTION,
+  PRICE,
+  PRODUCT_API_ENDPOINT,
+  RATING,
+  RUPEES_SYMBOL,
+} from "../../constants/constants";
 import "./ProductModal.css";
 
 const ProductModal = ({ productId, onClose }) => {
@@ -48,23 +57,23 @@ const ProductModal = ({ productId, onClose }) => {
             <div className="modal-details">
               <h2 className="modal-title">{product?.title}</h2>
               <p>
-                <strong>Description:</strong> {product?.description}
+                <strong>{DESCRIPTION}:</strong> {product?.description}
               </p>
               <p>
-                <strong>Category:</strong> {product?.category}
+                <strong>{CATEGORY}:</strong> {product?.category}
               </p>
               <p>
-                <strong>Brand:</strong> {product?.brand}
+                <strong>{BRAND}:</strong> {product?.brand}
               </p>
               <p>
-                <strong>Price:</strong> {RUPEES_SYMBOL}
+                <strong>{PRICE}:</strong> {RUPEES_SYMBOL}
                 {product?.price}
               </p>
               <p>
-                <strong>Rating:</strong> {product?.rating}
+                <strong>{RATING}:</strong> {product?.rating}
               </p>
               <p>
-                <strong>Availability:</strong>{" "}
+                <strong>{AVAILABILITY}:</strong>{" "}
                 {product?.stock ? "In Stock" : "Out of Stock"}
               </p>
               <p>

@@ -1,6 +1,6 @@
 // ProductListView.js
 import { useState, useEffect, useMemo, useRef } from "react";
-import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
+import { NO_RESULT_FOUND, PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
 import ProductFilterSort from "../ProductFilterSort/ProductFilterSort";
 import "./ProductListView.css";
@@ -168,7 +168,7 @@ const ProductListView = () => {
           ))}
       </div>
       {cardData.length > 0 && filteredProducts.length === 0 && (
-        <div className="no-result">No search result found!!!</div>
+        <div className="no-result">{NO_RESULT_FOUND}</div>
       )}
 
       {/* Modal to display selected product details */}

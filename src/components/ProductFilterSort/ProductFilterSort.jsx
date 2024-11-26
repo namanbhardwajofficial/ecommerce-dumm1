@@ -8,6 +8,8 @@ import {
   PRICE,
   STAR_AND_UP,
   STARS,
+  VALIDATION_MAX,
+  VALIDATION_MIN,
 } from "../../constants/constants";
 
 const ProductFilterSort = ({
@@ -47,7 +49,7 @@ const ProductFilterSort = ({
                 filters.priceRange[1],
               ]);
             } else {
-              alert("Min price cannot be greater than max price.");
+              alert({ VALIDATION_MIN });
             }
           }}
         />
@@ -65,7 +67,7 @@ const ProductFilterSort = ({
                 maxPrice || null,
               ]);
             } else {
-              alert("Max price cannot be less than min price.");
+              alert({ VALIDATION_MAX });
             }
           }}
         />
