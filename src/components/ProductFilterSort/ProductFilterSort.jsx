@@ -49,7 +49,7 @@ const ProductFilterSort = ({
                 filters.priceRange[1],
               ]);
             } else {
-              alert({ VALIDATION_MIN });
+              alert(VALIDATION_MIN);
             }
           }}
         />
@@ -67,7 +67,7 @@ const ProductFilterSort = ({
                 maxPrice || null,
               ]);
             } else {
-              alert({ VALIDATION_MAX });
+              alert(VALIDATION_MAX);
             }
           }}
         />
