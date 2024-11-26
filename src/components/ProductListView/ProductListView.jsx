@@ -9,12 +9,22 @@ import "./ProductListView.css";
 const ProductListView = () => {
   const initialCardData = useProductAPICall(PRODUCT_API_ENDPOINT);
   const [cardData, setCardData] = useState(initialCardData || []);
+  const [categories, setCategories] = useState([]); // State to store unique categories
+
   const [filters, setFilters] = useState({
     category: "",
     priceRange: [0, 5000],
     rating: 0,
     sortBy: "",
   });
+
+  useEffect(() => {
+    if (initialCardData) {
+      const newCategories = initialCardData.map((product) => product.category);
+      const uniqueCategories = [...new Set(newCategories)];
+      setCategories(uniqueCategories);
+    }
+  }, [initialCardData]);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...cardData];
@@ -75,6 +85,7 @@ const ProductListView = () => {
       {/* Filters and Sort Options */}
       <ProductFilterSort
         filters={filters}
+        categories={categories}
         onFilterChange={handleFilterChange}
         onClearFilter={handleClearFilters}
       />

@@ -1,8 +1,12 @@
-// ProductFilterSort.js
 import React from "react";
 import "./ProductFilterSort.css";
 
-const ProductFilterSort = ({ filters, onFilterChange, onClearFilter }) => {
+const ProductFilterSort = ({
+  filters,
+  onFilterChange,
+  onClearFilter,
+  categories,
+}) => {
   return (
     <div className="filters-container">
       <div className="filter-item">
@@ -11,9 +15,14 @@ const ProductFilterSort = ({ filters, onFilterChange, onClearFilter }) => {
           onChange={(e) => onFilterChange("category", e.target.value)}
         >
           <option value="">All Categories</option>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
-          <option value="home">Home</option>
+          {categories.map((category, index) => {
+            console.log(category);
+            return (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            );
+          })}
         </select>
       </div>
 
