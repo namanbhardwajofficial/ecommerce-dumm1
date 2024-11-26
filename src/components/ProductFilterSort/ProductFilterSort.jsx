@@ -38,11 +38,14 @@ const ProductFilterSort = ({
         <input
           type="number"
           placeholder="Min Price"
-          value={filters.priceRange[0]}
+          value={filters.priceRange[0] || ""}
           onChange={(e) => {
-            const minPrice = parseFloat(e.target.value) || 0;
-            if (minPrice <= filters.priceRange[1]) {
-              onFilterChange("priceRange", [minPrice, filters.priceRange[1]]);
+            const minPrice = parseFloat(e.target.value);
+            if (isNaN(minPrice) || minPrice <= filters.priceRange[1]) {
+              onFilterChange("priceRange", [
+                minPrice || null,
+                filters.priceRange[1],
+              ]);
             } else {
               alert("Min price cannot be greater than max price.");
             }
@@ -53,11 +56,14 @@ const ProductFilterSort = ({
         <input
           type="number"
           placeholder="Max Price"
-          value={filters.priceRange[1]}
+          value={filters.priceRange[1] || ""}
           onChange={(e) => {
-            const maxPrice = parseFloat(e.target.value) || 5000;
-            if (maxPrice >= filters.priceRange[0]) {
-              onFilterChange("priceRange", [filters.priceRange[0], maxPrice]);
+            const maxPrice = parseFloat(e.target.value);
+            if (isNaN(maxPrice) || maxPrice >= filters.priceRange[0]) {
+              onFilterChange("priceRange", [
+                filters.priceRange[0],
+                maxPrice || null,
+              ]);
             } else {
               alert("Max price cannot be less than min price.");
             }
