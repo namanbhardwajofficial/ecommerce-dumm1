@@ -1,58 +1,129 @@
-/* Modal Overlay */
+/* ProductModal.css */
+
+/* Overlay background */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  scroll-behavior: smooth; /* Smooth scrolling */
 }
 
-/* Modal Content */
+/* Modal container with flex layout */
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #f4f4f4; /* Light grey background */
   border-radius: 8px;
+  padding: 20px;
   width: 80%;
-  max-width: 600px;
+  max-width: 900px; /* Max width for the modal */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   position: relative;
-  overflow-y: auto;
+  display: flex;
+  overflow: hidden; /* Prevent scrollbars */
 }
 
-/* Close Button */
+/* Close button style */
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 24px;
-  font-weight: bold;
+  background: transparent;
   border: none;
-  background: none;
+  font-size: 40px;
+  color: #333;
   cursor: pointer;
+  transition: color 0.7s;
 }
 
-/* Modal Details */
-.modal-details h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.close-btn:hover {
+  color: #e74c3c; /* Change color on hover */
 }
 
-.modal-details img {
+/* Flex container for modal content, dividing image and details */
+.modal-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left section for image */
+.modal-image {
+  flex: 1; /* 50% of the container width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px; /* Space between image and details */
+}
+
+.product-image {
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+/* Right section for product data */
+.modal-details {
+  flex: 1; /* 50% of the container width */
+  padding-left: 20px; /* Space between image and details */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.modal-title {
+  text-align: center; /* Center the title */
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px; /* Space between title and other details */
+}
+
+.modal-details h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: #333;
 }
 
 .modal-details p {
+  font-size: 1.1em;
   margin: 10px 0;
+  color: #555;
 }
 
-/* Rating */
-.modal-details .rating {
-  font-size: 16px;
+.modal-details strong {
   font-weight: bold;
+  color: #333;
+}
+
+/* Optional: Make the modal content responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    flex-direction: column; /* Stack the image and data vertically */
+    padding: 15px;
+  }
+
+  .modal-image {
+    margin-bottom: 20px; /* Add space below the image */
+  }
+
+  .modal-details {
+    padding-left: 0; /* Remove left padding */
+    padding-right: 0; /* Remove right padding */
+  }
+
+  .modal-title {
+    font-size: 1.5em;
+  }
+
+  .modal-details p {
+    font-size: 1em;
+  }
 }

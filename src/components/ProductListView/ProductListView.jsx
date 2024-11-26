@@ -87,21 +87,12 @@ const ProductListView = () => {
     });
   };
 
-  async function getproductDetails(productId) {
-    const productURLToCall = PRODUCT_API_ENDPOINT + "/" + productId;
-    const response = await fetch(productURLToCall);
-    const result = await response.json();
-    return result;
-  }
-
-  const openModal = async (productId) => {
-    const result = await getproductDetails(productId);
-    setSelectedProduct(result);
+  const openModal = (productId) => {
+    setSelectedProduct(productId);
   };
 
   // Close modal
   const closeModal = () => {
-    console.log("product");
     setSelectedProduct(null);
   };
 
@@ -134,7 +125,7 @@ const ProductListView = () => {
 
       {/* Modal to display selected product details */}
       {selectedProduct != null && (
-        <ProductModal product={selectedProduct} onClose={closeModal} />
+        <ProductModal productId={selectedProduct} onClose={closeModal} />
       )}
     </div>
   );
