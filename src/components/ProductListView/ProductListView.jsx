@@ -1,5 +1,5 @@
 // ProductListView.js
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import useProductAPICall from "../../hooks/useProductAPICall";
 import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
@@ -8,9 +8,11 @@ import "./ProductListView.css";
 import ProductModal from "../ProductModal/ProductModal";
 
 const ProductListView = () => {
-  const initialCardData = useProductAPICall(PRODUCT_API_ENDPOINT);
-  const [cardData, setCardData] = useState(initialCardData || []);
+  const [cardData, setCardData] = useState([]);
   const [categories, setCategories] = useState([]); // State to store unique categories
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [lastElement, setLastElement] = useState(null);
 
   const [filters, setFilters] = useState({
     category: "",
@@ -18,16 +20,60 @@ const ProductListView = () => {
     rating: 0,
     sortBy: "",
   });
+
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const observer = useRef(
+    new IntersectionObserver((entries) => {
+      const first = entries[0];
+      if (first.isIntersecting) {
+        setPage((no) => no + 1);
+      }
+    })
+  );
+
+  const fetchCardData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${PRODUCT_API_ENDPOINT}?limit=10&skip=${10 * page}`
+      );
+      const result = await response.json();
+      if (result?.products) {
+        setCardData((prev) => [...prev, ...result?.products]);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    if (initialCardData) {
-      const newCategories = initialCardData.map((product) => product.category);
+    fetchCardData();
+  }, [page]);
+
+  useEffect(() => {
+    const currentElement = lastElement;
+    const currentObserver = observer.current;
+
+    if (currentElement) {
+      currentObserver.observe(currentElement);
+    }
+
+    return () => {
+      if (currentElement) {
+        currentObserver.unobserve(currentElement);
+      }
+    };
+  }, [lastElement]);
+
+  useEffect(() => {
+    if (cardData) {
+      const newCategories = cardData.map((product) => product.category);
       // @ts-ignore
       const uniqueCategories = [...new Set(newCategories)];
       setCategories(uniqueCategories);
     }
-  }, [initialCardData]);
+  }, [page]);
 
   const filteredProducts = useMemo(() => {
     if (cardData) {
@@ -67,10 +113,10 @@ const ProductListView = () => {
 
   // Fetch initial data on mount
   useEffect(() => {
-    if (initialCardData) {
-      setCardData(initialCardData);
+    if (cardData) {
+      setCardData(cardData);
     }
-  }, [initialCardData]);
+  }, [cardData]);
 
   // Handle filter changes
   const handleFilterChange = (filterType, value) => {
@@ -110,16 +156,17 @@ const ProductListView = () => {
       <div className="product-list">
         {filteredProducts.length > 0 &&
           filteredProducts.map((product) => (
-            <ProductCard
-              key={product?.id}
-              title={product?.title}
-              description={product?.description}
-              imageAddress={product?.images?.[0]}
-              category={product?.category}
-              price={product?.price}
-              rating={product?.rating}
-              onClick={() => openModal(product?.id)}
-            />
+            <div key={product?.id} ref={setLastElement}>
+              <ProductCard
+                title={product?.title}
+                description={product?.description}
+                imageAddress={product?.images?.[0]}
+                category={product?.category}
+                price={product?.price}
+                rating={product?.rating}
+                onClick={() => openModal(product?.id)}
+              />
+            </div>
           ))}
       </div>
 
