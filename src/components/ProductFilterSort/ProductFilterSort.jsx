@@ -2,7 +2,7 @@
 import React from "react";
 import "./ProductFilterSort.css";
 
-const ProductFilterSort = ({ filters, onFilterChange }) => {
+const ProductFilterSort = ({ filters, onFilterChange, onClearFilter }) => {
   return (
     <div className="filters-container">
       <div className="filter-item">
@@ -65,6 +65,12 @@ const ProductFilterSort = ({ filters, onFilterChange }) => {
           <option value="priceLowToHigh">Price: Low to High</option>
           <option value="priceHighToLow">Price: High to Low</option>
         </select>
+      </div>
+      <div className="filter-item">
+        {/* Clear Filters Button */}
+        <button className="clear-filters-btn" onClick={() => onClearFilter()}>
+          Clear All Filters
+        </button>
       </div>
     </div>
   );

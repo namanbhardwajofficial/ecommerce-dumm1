@@ -1,4 +1,4 @@
-/* ProductFilterSort.css */
+/* Container for all the filter options */
 .filters-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,18 +8,22 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: flex-start; /* Align items at the start */
 }
 
+/* Each filter item (select/input) */
 .filter-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   width: 220px;
+  flex-shrink: 0; /* Prevents items from shrinking */
 }
 
+/* Styling for all select elements */
 .filter-item select,
 .filter-item input {
-  padding: 12px;
+  padding: 10px;
   font-size: 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
@@ -27,25 +31,17 @@
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+/* Focus effect for inputs and selects */
 .filter-item select:focus,
 .filter-item input:focus {
   border-color: #007bff;
   background-color: #f1faff;
 }
 
-.filter-item input[type="number"] {
-  width: 100%;
-}
-
-.filter-item label {
-  font-weight: 600;
-  color: #333;
-  font-size: 14px;
-}
-
+/* Clear Filters Button */
 .clear-filters-btn {
   background-color: #e74c3c;
-  color: #fff;
+  color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -53,14 +49,16 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px;
-  align-self: flex-start;
+  align-self: flex-start; /* Align button to the start */
+  white-space: nowrap; /* Ensures button text doesn’t wrap */
 }
 
+/* Hover effect for the Clear Filters button */
 .clear-filters-btn:hover {
   background-color: #c0392b;
 }
 
+/* Focus effect for the Clear Filters button */
 .clear-filters-btn:focus {
   outline: none;
 }

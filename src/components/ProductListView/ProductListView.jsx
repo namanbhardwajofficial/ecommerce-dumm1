@@ -11,7 +11,7 @@ const ProductListView = () => {
   const [cardData, setCardData] = useState(initialCardData || []);
   const [filters, setFilters] = useState({
     category: "",
-    priceRange: [0, Infinity],
+    priceRange: [0, 5000],
     rating: 0,
     sortBy: "",
   });
@@ -64,7 +64,7 @@ const ProductListView = () => {
   const handleClearFilters = () => {
     setFilters({
       category: "",
-      priceRange: [0, Infinity],
+      priceRange: [0, 5000],
       rating: 0,
       sortBy: "",
     });
@@ -76,12 +76,8 @@ const ProductListView = () => {
       <ProductFilterSort
         filters={filters}
         onFilterChange={handleFilterChange}
+        onClearFilter={handleClearFilters}
       />
-
-      {/* Clear Filters Button */}
-      <button className="clear-filters-btn" onClick={handleClearFilters}>
-        Clear All Filters
-      </button>
 
       {/* Display Products */}
       <div className="product-list">
