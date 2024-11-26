@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
+import { PRODUCT_API_ENDPOINT, RUPEES_SYMBOL } from "../../constants/constants";
 import "./ProductModal.css";
 
 const ProductModal = ({ productId, onClose }) => {
@@ -56,7 +56,8 @@ const ProductModal = ({ productId, onClose }) => {
               <strong>Brand:</strong> {product?.brand}
             </p>
             <p>
-              <strong>Price:</strong> ${product?.price}
+              <strong>Price:</strong> {RUPEES_SYMBOL}
+              {product?.price}
             </p>
             <p>
               <strong>Rating:</strong> {product?.rating}
