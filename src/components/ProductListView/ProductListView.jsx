@@ -1,5 +1,5 @@
 // ProductListView.js
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import useProductAPICall from "../../hooks/useProductAPICall";
 import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
@@ -21,6 +21,7 @@ const ProductListView = () => {
   useEffect(() => {
     if (initialCardData) {
       const newCategories = initialCardData.map((product) => product.category);
+      // @ts-ignore
       const uniqueCategories = [...new Set(newCategories)];
       setCategories(uniqueCategories);
     }

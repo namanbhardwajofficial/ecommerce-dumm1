@@ -1,3 +1,11 @@
 export const PRODUCT_API_ENDPOINT = "https://dummyjson.com/products";
 export const RUPEES_SYMBOL = "₹";
 export const TOTAL_RATING = "/5";
+export const ALL_CATEGORIES = "All Categories";
+export const ALL_RATINGS = "All Ratings";
+export const STAR_AND_UP = " Star & Up";
+export const STARS = " Star";
+export const LOW_TO_HIGH = "Low to High";
+export const HIGH_TO_LOW = "High to Low";
+export const PRICE = "Price";
+export const CLEAR_ALL_FILTERS="Clear All Filters";

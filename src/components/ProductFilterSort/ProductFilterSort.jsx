@@ -1,5 +1,14 @@
-import React from "react";
 import "./ProductFilterSort.css";
+import {
+  ALL_CATEGORIES,
+  ALL_RATINGS,
+  CLEAR_ALL_FILTERS,
+  HIGH_TO_LOW,
+  LOW_TO_HIGH,
+  PRICE,
+  STAR_AND_UP,
+  STARS,
+} from "../../constants/constants";
 
 const ProductFilterSort = ({
   filters,
@@ -14,9 +23,8 @@ const ProductFilterSort = ({
           value={filters.category}
           onChange={(e) => onFilterChange("category", e.target.value)}
         >
-          <option value="">All Categories</option>
+          <option value="">{ALL_CATEGORIES}</option>
           {categories.map((category, index) => {
-            console.log(category);
             return (
               <option key={index} value={category}>
                 {category}
@@ -45,7 +53,7 @@ const ProductFilterSort = ({
           onChange={(e) =>
             onFilterChange("priceRange", [
               filters.priceRange[0],
-              parseFloat(e.target.value) || Infinity,
+              parseFloat(e.target.value) || 5000,
             ])
           }
         />
@@ -56,12 +64,12 @@ const ProductFilterSort = ({
           value={filters.rating}
           onChange={(e) => onFilterChange("rating", parseInt(e.target.value))}
         >
-          <option value={0}>All Ratings</option>
-          <option value={1}>1 Star & up</option>
-          <option value={2}>2 Stars & up</option>
-          <option value={3}>3 Stars & up</option>
-          <option value={4}>4 Stars & up</option>
-          <option value={5}>5 Stars</option>
+          <option value={0}>{ALL_RATINGS}</option>
+          <option value={1}>1{STAR_AND_UP}</option>
+          <option value={2}>2{STAR_AND_UP}</option>
+          <option value={3}>3{STAR_AND_UP}</option>
+          <option value={4}>4{STAR_AND_UP}</option>
+          <option value={5}>5{STARS}</option>
         </select>
       </div>
 
@@ -71,14 +79,18 @@ const ProductFilterSort = ({
           onChange={(e) => onFilterChange("sortBy", e.target.value)}
         >
           <option value="">Sort By</option>
-          <option value="priceLowToHigh">Price: Low to High</option>
-          <option value="priceHighToLow">Price: High to Low</option>
+          <option value="priceLowToHigh">
+            {PRICE}: {LOW_TO_HIGH}
+          </option>
+          <option value="priceHighToLow">
+            {PRICE}: {HIGH_TO_LOW}
+          </option>
         </select>
       </div>
       <div className="filter-item">
         {/* Clear Filters Button */}
         <button className="clear-filters-btn" onClick={() => onClearFilter()}>
-          Clear All Filters
+          {CLEAR_ALL_FILTERS}
         </button>
       </div>
     </div>
