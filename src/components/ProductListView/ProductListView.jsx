@@ -1,5 +1,5 @@
 // ProductListView.js
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import useProductAPICall from "../../hooks/useProductAPICall";
 import { PRODUCT_API_ENDPOINT } from "../../constants/constants";
 import ProductCard from "../ProductCard/ProductCard";
