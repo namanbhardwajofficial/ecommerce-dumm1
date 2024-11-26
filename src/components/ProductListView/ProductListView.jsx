@@ -71,7 +71,7 @@ const ProductListView = () => {
       setCategories(uniqueCategories);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, cardData]);
 
   const filteredProducts = useMemo(() => {
     if (cardData) {
@@ -167,7 +167,7 @@ const ProductListView = () => {
             </div>
           ))}
       </div>
-      {filteredProducts.length === 0 && (
+      {cardData.length > 0 && filteredProducts.length === 0 && (
         <div className="no-result">No search result found!!!</div>
       )}
 
