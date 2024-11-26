@@ -11,8 +11,7 @@ const ProductListView = () => {
   // Fetch additional data manually
   const fetchMoreCardData = useCallback(async () => {
     try {
-      const url = PRODUCT_API_ENDPOINT + `?limit=15`;
-      console.log(url);
+      const url = `${PRODUCT_API_ENDPOINT}?limit=15`;
       const response = await fetch(url);
       const result = await response.json();
       if (result?.products) {
@@ -31,7 +30,11 @@ const ProductListView = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+
+      // Check if the user has scrolled near the bottom
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
         fetchMoreCardData();
       }
     };
