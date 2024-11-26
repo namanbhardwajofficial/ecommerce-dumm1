@@ -87,10 +87,16 @@ const ProductListView = () => {
     });
   };
 
-  // Open modal with product data
-  const openModal = (product) => {
-    console.log("hello");
-    setSelectedProduct(product);
+  async function getproductDetails(productId) {
+    const productURLToCall = PRODUCT_API_ENDPOINT + "/" + productId;
+    const response = await fetch(productURLToCall);
+    const result = await response.json();
+    return result;
+  }
+
+  const openModal = async (productId) => {
+    const result = await getproductDetails(productId);
+    setSelectedProduct(result);
   };
 
   // Close modal
@@ -127,7 +133,7 @@ const ProductListView = () => {
       </div>
 
       {/* Modal to display selected product details */}
-      {selectedProduct && (
+      {selectedProduct != null && (
         <ProductModal product={selectedProduct} onClose={closeModal} />
       )}
     </div>

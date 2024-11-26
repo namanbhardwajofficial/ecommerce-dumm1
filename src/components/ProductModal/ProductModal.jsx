@@ -1,14 +1,14 @@
 // ProductModal.js
-import React from "react";
 import "./ProductModal.css";
 
 const ProductModal = ({ product, onClose }) => {
+  console.log("PPP", product);
   if (!product) return null; // If there's no product, return null
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-btn" onClick={onClose}>
+        <button className="close-btn" onClick={() => onClose(product)}>
           ×
         </button>
         <div className="modal-details">
