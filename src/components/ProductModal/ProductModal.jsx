@@ -44,33 +44,31 @@ const ProductModal = ({ productId, onClose }) => {
           )}
 
           {/* Right section for Product Data */}
-          {product && (
-            <div className="modal-details">
-              <h2 className="modal-title">{product?.title}</h2>
-              <p>
-                <strong>Description:</strong> {product?.description}
-              </p>
-              <p>
-                <strong>Category:</strong> {product?.category}
-              </p>
-              <p>
-                <strong>Brand:</strong> {product?.brand}
-              </p>
-              <p>
-                <strong>Price:</strong> ${product?.price}
-              </p>
-              <p>
-                <strong>Rating:</strong> {product?.rating}
-              </p>
-              <p>
-                <strong>Availability:</strong>{" "}
-                {product?.stock ? "In Stock" : "Out of Stock"}
-              </p>
-              <p>
-                <strong>Current Stock Remaining:</strong> {product?.stock}
-              </p>
-            </div>
-          )}
+          <div className="modal-details">
+            <h2 className="modal-title">{product?.title}</h2>
+            <p>
+              <strong>Description:</strong> {product?.description}
+            </p>
+            <p>
+              <strong>Category:</strong> {product?.category}
+            </p>
+            <p>
+              <strong>Brand:</strong> {product?.brand}
+            </p>
+            <p>
+              <strong>Price:</strong> ${product?.price}
+            </p>
+            <p>
+              <strong>Rating:</strong> {product?.rating}
+            </p>
+            <p>
+              <strong>Availability:</strong>{" "}
+              {product?.stock ? "In Stock" : "Out of Stock"}
+            </p>
+            <p>
+              <strong>Current Stock Remaining:</strong> {product?.stock}
+            </p>
+          </div>
         </div>
       </div>
     </div>
